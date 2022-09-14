@@ -33,6 +33,7 @@ boxplot(df1[,2:4])
 boxplot(df1[,3:4])
 boxplot(df1$uniqu.num)
 hist(df1$uniqu.num)
+#No need for any of the lines between 27 and 35 above. Try not to add extras to avoid confusing yourself.
 df.mean <- aggregate(df1$rep.num ~df1$group.char, FUN = "mean")
 df.mean
 colnames(df.mean) <- c("Factor","Mean")
@@ -47,12 +48,12 @@ df.sd
 b.plot <- barplot(df.mean$Mean, names.arg = df.mean$Factor)
 arrows(b.plot, df.mean$Mean-df.sd$StanDev,
        b.plot, df.mean$Mean+df.sd$StanDev,angle=90,code=3)
-b.plot <- barplot(df.mean$Mean, names.arg = df.mean$Factor, ylim = c(0,5))
+b.plot <- barplot(df.mean$Mean, names.arg = df.mean$Factor, ylim = c(0,5)) #Need to change the ylim to match your data instead of the example.
 
 arrows(b.plot, df.mean$Mean-df.sd$StanDev,
        b.plot, df.mean$Mean+df.sd$StanDev,angle=90,code=3)
-barplot(df.mean$Mean, names.arg = df.mean$Factor, ylim = c(0,5), horiz = TRUE)
-plot(df1$dec.num ~ df1$rep.num)
+barplot(df.mean$Mean, names.arg = df.mean$Factor, ylim = c(0,5), horiz = TRUE) #this should not be in here.
+plot(df1$dec.num ~ df1$rep.num) # you haven't finished the barplot yet. Why have we moved onto scatter?
 plot(df1$dec.num ~ df1$uniqu.num)
   # Change the x and y labels and add a title
 plot(df1$dec.num ~ df1$uniqu.num, xlab = "Explanatory", ylab = "Response")
@@ -74,7 +75,7 @@ plot(df1$dec.num ~ df1$uniqu.num, xlab = "Explanatory", ylab = "Response", main 
 par(family = "serif")
 #Then replot
 plot(df1$dec.num ~ df1$uniqu.num, xlab = "Explanatory", ylab = "Response", main = "My Favorite Scatter Plot", 
-     cex.axis=0.8, cex.main = 0.5, cex.lab = 1.25, pch=17, col = "grey40", cex = 1.5)
+     cex.axis=0.8, cex.main = 0.5, cex.lab = 1.25, pch=17, col = "grey40", cex = 1.5) # this is all just a copy of what we did in the tutorial - you were supposed to create your own barplot and scatter
 
 
   # Export the plot as a PDF that is 4 inches wide and 7 inches tall.
@@ -86,10 +87,14 @@ plot(df1$dec.num ~ df1$uniqu.num, xlab = "Days", ylab = "Rainfall", main = "Rain
 
   # Change the x and y labels and add a title
 plot(df1$dec.num ~ df1$uniqu.num, xlab = "Days", ylab = "Rainfall")
-> plot(df1$dec.num ~ df1$uniqu.num, xlab = "Days", ylab = "Rainfall", main = "Rainfall In Gatlinburg, TN")
+> plot(df1$dec.num ~ df1$uniqu.num, xlab = "Days", ylab = "Rainfall", main = "Rainfall In Gatlinburg, TN") # why the arrow before this line?
 
   # Export the plot as a JPEG by using the "Export" button in the plotting pane.
 
 # Upload both plots with the script used to create them to GitHub.
   # Follow the same file naming format as last week for the script.
-  # Name plots as Lastname_barplot or Lastname_scatterplot. Save them to your "plots" folder.
+  # Name plots as Lastname_barplot or Lastname_scatterplot. Save them to your "plots" folder. #Did not save by name.
+
+#both of the plots you exported are scatter plots.
+#where is the code to export the PDF and set your working directory? 
+#barplot limits are too small and axis labels are missing. Also not exported.
