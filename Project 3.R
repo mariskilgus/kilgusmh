@@ -46,9 +46,13 @@ bioenv(dune, dune.env3)
 
 
 # After running the function example, modify your script to generate another diversity metric that is NOT part of the example. 
+dune.env2 <- dune.env[,c('B4', 'Oasis', 'Dry')]
+
 # If there are two diversity metrics in the example script, neither of these will count as the modified script.
 # Hint: If the function can "only" caluclate Simpson's diversity, the inverse of Simpson's diversity is another common metric. 
 # Add the results of this manipulation to your script (if in the console) or upload the new plot.
+dune.env3 <- prepare.bioenv(dune.env, as.numeric=c('Oasis', 'Dry'))
+bioenv(dune, dune.env3)
 
 # Diversity metrics are frequently used in community ecology for reasons ranging from a quick comparison between sites to understanding community stability.
 # Their calculation can be very tedious by hand - and very fast with a package designed for the operation.
