@@ -1,6 +1,6 @@
 # Now it is time to create your own data frame using the tools we have learned this week.
 # First, resave this script as: your last name_Week1_Assignment
-  # e.g. mine would be Wilson_Week1_Assignemnt
+  # e.g. mine would be Wilson_Week1_Assignemnt #Forgot about this.
 
 
 # Create 3 numeric vectors and 2 character vectors that are each 15 values in length with the following structures:
@@ -34,8 +34,10 @@ df1 <- df1[,-1]
 df1
 
 # Export the data frame as a .csv file 
+#Where is your code to export the CSV? DId not set the working directory or export the CSV.
 
 # Generate summary statistics of your data frame and copy them as text into your script under a new section heading.
+#See the red "X" next to each of these? That means R reads it as a function rather than a comment/text like it is intended. Each line needs a hashtag in front of it.
 group.char          uniqu.num         rep.num         dec.num     
 Length:16          Min.   :  0.00   Min.   :0.000   Min.   :1.100  
 Class :character   1st Qu.:  3.25   1st Qu.:2.000   1st Qu.:2.175  
