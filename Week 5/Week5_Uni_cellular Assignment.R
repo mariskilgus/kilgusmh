@@ -1,4 +1,5 @@
 # First, recreate Figure 4 from Herron et al. (2019). De novo origins of multicellularity in response to predation. Scientific Reports.
+# https://datadryad.org/stash/dataset/doi:10.5061%2Fdryad.53k345s
   # Search datadryad.org by the paper title and download the dataset. It will include .csv files and R scripts, organized by figure.
   # Save the script and change the working directory on lines 8 and 115 to match your GitHub repository. (6 points)
   # Export and save the plot you've created. (2 points)
@@ -8,16 +9,17 @@ install.packages("fitdistrplus")
 library(fitdistrplus)
 install.packages("logspline")
 library(logspline)
+data <- read.csv("data5", header=TRUE)
+data.frame("data5")
 
-data <- read.csv("Dryad_data.csv", header=TRUE)
+plot(data$~ data$Ara_plusAnc, xlab ="Ara+ Ancestor", ylab ="Ara+1", main = "Fig 1(c)" )
 
-plot(data$Ara_plus1Ev ~ data$Ara_plusAnc, xlab ="Ara+ Ancestor", ylab ="Ara+1", main = "Fig 1(c)" )
 fig1c.mod <- lm(data$Ara_plus1Ev ~ data$Ara_plusAnc)
 anova(fig1c.mod)
 summary(fig1c.mod)
 abline(fig1c.mod, col = "grey", lwd= 3)
 nolog_data <- as.data.frame(10^data[,2:6])
-plot(nolog_data$Ara_plus1Ev ~ nolog_data$Ara_plusAnc, 
+plot(nolog_data$Ara_plus1Ev ~ nolog_data$Ara_plusAnc,
      xlab ="Ara+ Ancestor", ylab ="Ara+1", main = "Fig 1(c) not transformed" )
 lim_nolog <- as.data.frame(nolog_data[(nolog_data$Ara_plus1Ev <= 0.02),])
 lim_nolog <- as.data.frame(lim_nolog[(lim_nolog$Ara_plusAnc <= 0.02),])
