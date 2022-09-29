@@ -4,6 +4,57 @@
   # Export and save the plot you've created. (2 points)
   # Zoom into your plot to look at the distribution for different strains.
 
+install.packages("fitdistrplus")
+library(fitdistrplus)
+install.packages("logspline")
+library(logspline)
+
+data <- read.csv("Dryad_data.csv", header=TRUE)
+
+plot(data$Ara_plus1Ev ~ data$Ara_plusAnc, xlab ="Ara+ Ancestor", ylab ="Ara+1", main = "Fig 1(c)" )
+fig1c.mod <- lm(data$Ara_plus1Ev ~ data$Ara_plusAnc)
+anova(fig1c.mod)
+summary(fig1c.mod)
+abline(fig1c.mod, col = "grey", lwd= 3)
+nolog_data <- as.data.frame(10^data[,2:6])
+plot(nolog_data$Ara_plus1Ev ~ nolog_data$Ara_plusAnc, 
+     xlab ="Ara+ Ancestor", ylab ="Ara+1", main = "Fig 1(c) not transformed" )
+lim_nolog <- as.data.frame(nolog_data[(nolog_data$Ara_plus1Ev <= 0.02),])
+lim_nolog <- as.data.frame(lim_nolog[(lim_nolog$Ara_plusAnc <= 0.02),])
+plot(lim_nolog$Ara_plus1Ev ~ lim_nolog$Ara_plusAnc, 
+     xlab ="Ara+ Ancestor", ylab ="Ara+1", main = "Fig 1(c) not transformed, no outliers" )
+fig1c.mod2 <- lm(nolog_data$Ara_plus1Ev ~ nolog_data$Ara_plusAnc)
+anova(fig1c.mod2)
+summary(fig1c.mod2)
+fig1c.mod3 <- lm(lim_nolog$Ara_plus1Ev ~ lim_nolog$Ara_plusAnc)
+anova(fig1c.mod3)
+summary(fig1c.mod3)
+plot(lim_nolog$Ara_plus1Ev ~ lim_nolog$Ara_plusAnc, 
+     xlab ="Ara+ Ancestor", ylab ="Ara+1", main = "Fig 1(c) not transformed, no outliers" )
+abline(fig1c.mod3, col = "grey", lwd= 3)
+plot(lim_nolog$Ara_plus1Ev ~ lim_nolog$Ara_plusAnc, 
+     xlab ="Ara+ Ancestor", ylab ="Ara+1", main = "Fig 1(c) not transformed, no outliers", 
+     xlim = c(0,0.0015), ylim= c(0,0.0015))
+abline(fig1c.mod3, col = "grey", lwd= 3)
+one.col <- lim_nolog$Ara_plusAnc #All we need to do is change the vector to re-run.
+hist(one.col, main = "Ancestor")
+fit.norm <- fitdist(one.col, distr = "norm")
+fit.norm <- fitdist(one.col*100, distr = "norm")
+fit.logis <- fitdist(one.col*100, distr = "logis")
+fit.weibull <- fitdist(one.col*100, distr = "weibull", lower = c(0, 0), start = list(scale = 1, shape = 1))
+fit.gamma <- fitdist(one.col*100, distr = "gamma", lower = c(0, 0), start = list(scale = 1, shape = 1))
+gofstat(list(fit.weibull, fit.gamma, fit.norm, fit.logis))
+fit.weibull <- fitdist(one.col, distr = "weibull", lower = c(0, 0), start = list(scale = 1, shape = 1))
+fit.gamma <- fitdist(one.col, distr = "gamma", lower = c(0, 0), start = list(scale = 1, shape = 1))
+gofstat(list(fit.weibull, fit.gamma))
+one.col <- lim_nolog$Ara_plus1Ev
+hist(one.col, main = "Evolved")
+fit.norm <- fitdist(one.col*100, distr = "norm")
+fit.logis <- fitdist(one.col*100, distr = "logis")
+fit.weibull <- fitdist(one.col*100, distr = "weibull", lower = c(0, 0), start = list(scale = 1, shape = 1))
+fit.gamma <- fitdist(one.col*100, distr = "gamma", lower = c(0, 0), start = list(scale = 1, shape = 1))
+gofstat(list(fit.norm, fit.logis, fit.weibull, fit.gamma))
+
 # Do all of the strains in the plot have the same distributions (yes/no)? (2 pt)
 
 # Based on these observations of your strain distributions, why did the authors use a Kruskal-Wallis test rather than ANOVA to compare the strains? (2 pts)
