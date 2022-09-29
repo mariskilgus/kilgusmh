@@ -9,7 +9,7 @@ install.packages("fitdistrplus")
 library(fitdistrplus)
 install.packages("logspline")
 library(logspline)
-data <- read.csv("data5", header=TRUE)
+data <- read.csv("Figure4Data", header=TRUE)
 data.frame("data5")
 
 plot(data$~ data$Ara_plusAnc, xlab ="Ara+ Ancestor", ylab ="Ara+1", main = "Fig 1(c)" )
