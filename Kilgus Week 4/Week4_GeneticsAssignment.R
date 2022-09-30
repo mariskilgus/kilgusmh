@@ -8,7 +8,7 @@
   # Install the "stability" package, load it into your R environment, and use the data() function to load the "ge_data". 
 
 install.packages("stability")
-data.frame("ge_data")
+data.frame("ge_data") #This is the data that should have been used below (I know we already discussed).
 
 # Create two linear models for Yield Response: one related to the Environment and one to the Genotype.
   # 'Yield Response' in this dataset is a measure of phenotype expression.
