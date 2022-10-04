@@ -9,9 +9,9 @@ install.packages("fitdistrplus")
 library(fitdistrplus)
 install.packages("logspline")
 library(logspline)
-data <- read.csv("Figure4Data", header=TRUE)
-data.frame("data5")
-
+setwd("C:/GitHub/kilgusmh/Week 5")
+data <- read.csv("Figure4Data.csv", header=TRUE)
+data.frame("Figure4Data")
 plot(data$~ data$Ara_plusAnc, xlab ="Ara+ Ancestor", ylab ="Ara+1", main = "Fig 1(c)" )
 
 fig1c.mod <- lm(data$Ara_plus1Ev ~ data$Ara_plusAnc)
@@ -58,6 +58,7 @@ fit.gamma <- fitdist(one.col*100, distr = "gamma", lower = c(0, 0), start = list
 gofstat(list(fit.norm, fit.logis, fit.weibull, fit.gamma))
 
 # Do all of the strains in the plot have the same distributions (yes/no)? (2 pt)
+
 
 # Based on these observations of your strain distributions, why did the authors use a Kruskal-Wallis test rather than ANOVA to compare the strains? (2 pts)
 
