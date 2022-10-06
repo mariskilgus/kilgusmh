@@ -37,14 +37,15 @@ samplesizes
 data.weight$Strain <- factor(data.weight$Strain, levels = c('K101','K106','B506','B210','B201','B505','B211','B203','B204'))
 data.new$Strain <- factor(data.new$Strain, levels = c('K101','K106','B506','B210','B201','B505','B211','B203','B204'))
 
-
+ggsave(filename=paste("c:/Users/Kilgus/Documents/GitHub/kilgusmh/Week5/data5/Figure4",paste("Figure4", ".png", sep=""), sep=""), plot=myplot,
+       width = 10, height = 4, bg = 'transparent')
 myplot <- ggplot(data = data.weight,aes(x=Strain,y=log.progeny))
 
 geom_boxplot(size = 1.2)
 geom_jitter(data = data.new,
               aes(x=factor(Strain),
                   y=log.progeny),
-              size = 0.7, alpha = 0.3, color = 'green4', fill = 'green4') +
+              size = 0.7, alpha = 0.3, color = 'green4', fill = 'green4')
 theme(panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
         plot.background = element_rect(fill = "transparent", colour = NA),
@@ -69,8 +70,6 @@ annotate('text', x=6, y=-0.5, label="704")
 annotate('text', x=7, y=-0.5, label="51")
 annotate('text', x=8, y=-0.5, label="115")
 annotate('text', x=9, y=-0.5, label="103")
-ggsave(filename=paste("c:/Users/Kilgus/Documents/GitHub/kilgusmh/Week5/data5/Figure4",paste("Figure4", ".png", sep=""), sep=""), plot=myplot,
-       width = 10, height = 4, bg = 'transparent')
 fig1c.mod <- lm(data$Ara_plus1Ev ~ data$Ara_plusAnc)
 anova(fig1c.mod)
 summary(fig1c.mod)
