@@ -4,6 +4,7 @@
   # Save the script and change the working directory on lines 8 and 115 to match your GitHub repository. (6 points)
   # Export and save the plot you've created. (2 points)
   # Zoom into your plot to look at the distribution for different strains.
+#The figure you exported is blank. Make sure you check files after creating them.
 
 install.packages("fitdistrplus")
 library(fitdistrplus)
@@ -99,7 +100,7 @@ hist(one.col, main = "Ancestor")
 
 
 # Do all of the strains in the plot have the same distributions (yes/no)? (2 pt)
-
+#Where is the answer to this question?
 
 # Based on these observations of your strain distributions, why did the authors use a Kruskal-Wallis test rather than ANOVA to compare the strains? (2 pts)
 
@@ -141,7 +142,7 @@ gofstat(list(fit.norm, fit.logis, fit.weibull, fit.gamma))
     # This hypothesis does not need to be correct - it only needs to be ecologically rational based these two figures.
 
 
-
+#You didn't answer the questions or create this histogram at the end!
 
 
 
