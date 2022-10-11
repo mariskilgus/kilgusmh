@@ -15,8 +15,8 @@ install.packages("MASS")
 library(MASS)
 install.packages("MuMIn")
 library(MuMIn)
-
-glmm.mod <- glmmPQL(Flight.initiation.distance..FID.~Object, family = gaussian, random = ~ 1 | ID, data = df)
+df
+glmm.mod <- glmmPQL(block temperature carapace.width claw.width toadfish.cue.treatment activity.level prey eaten ~Object, family = gaussian, random = ~ 1 | ID, data = df)
 
 summary(glmm.mod)
 r.squaredGLMM(glmm.mod)
