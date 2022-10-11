@@ -15,7 +15,9 @@ install.packages("MASS")
 library(MASS)
 install.packages("MuMIn")
 library(MuMIn)
+
 glmm.mod <- glmmPQL(Flight.initiation.distance..FID.~Object, family = gaussian, random = ~ 1 | ID, data = df)
+
 summary(glmm.mod)
 r.squaredGLMM(glmm.mod)
 glmm.mod2 <- glmmPQL(Flight.initiation.distance..FID.~Object + Area, family = gaussian, random = ~ 1 | ID, data = df)
