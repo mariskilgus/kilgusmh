@@ -91,15 +91,15 @@ plot(lim_nolog$Ara_plus1Ev ~ lim_nolog$Ara_plusAnc,
      xlab ="Ara+ Ancestor", ylab ="Ara+1", main = "Fig 1(c) not transformed, no outliers", 
      xlim = c(0,0.0015), ylim= c(0,0.0015))
 abline(fig1c.mod3, col = "grey", lwd= 3)
-one.col <- lim_nolog$Ara_plusAnc #All we need to do is change the vector to re-run.
-hist(one.col, main = "Ancestor")
+
 
 
 # Do all of the strains in the plot have the same distributions (yes/no)? (2 pt)
 #Where is the answer to this question?
+#No and it is in the summary of the box plot.
 
 # Based on these observations of your strain distributions, why did the authors use a Kruskal-Wallis test rather than ANOVA to compare the strains? (2 pts)
-
+#The dependent variable is ordinal, which the Kruskal-Wallis test compares the best since ANOVA requires the dependent variable to be normally distributed.
 
 # Use the fitdist() and gofstat() functions to compare the poisson, negative binomial, and logistic distributions for:
   # (1) - The number of cells of progeny (data$Num.Cells.Progeny)
@@ -107,6 +107,8 @@ hist(one.col, main = "Ancestor")
       # 3 points each
     #HINT- "Num.Cells.Progeny" has defined breaks. To display results, use the formula with the "chisqbreaks" argument as follows:
       #gofstat(list(fit.1, fit.2, fit.3, etc), chisqbreaks=c(1,2,4,8,16,32,64))
+one.col <- lim_nolog$Ara_plusAnc #All we need to do is change the vector to re-run.
+hist(one.col, main = "Ancestor")
 fit.norm <- fitdist(one.col, distr = "norm")
 fit.norm <- fitdist(one.col*100, distr = "norm")
 fit.logis <- fitdist(one.col*100, distr = "logis")
@@ -128,17 +130,21 @@ gofstat(list(fit.norm, fit.logis, fit.weibull, fit.gamma))
 # Based on the AIC scores, which distribution is the best fit for: (4 pts)
   # (1) - The number of cells of progeny (data$Num.Cells.Progeny)?
   # (2) - The replication time (data$RepTime.sec)?
-
+# The negative bionomial is the best fit for both 1 and 2.
 
 # Plot a generic histogram for the replication time (data$RepTime.sec) (2 pt)
+
+
+
 
 # Based on the patterns of this histograms and Figure 4:
   #Give one hypothesis for an evolutionary process represented by the two tallest bars in your histogram. (6 pts)
   # Don't cheat by looking at the paper! 
     # This hypothesis does not need to be correct - it only needs to be ecologically rational based these two figures.
+#The growth rate would be fastest for the two tallest bars. It could show exponential growth compared to the other data sets.
 
+#I don't know how to put the histogram here, so pretend this is a histogram (IIII)
 
-#You didn't answer the questions or create this histogram at the end!
 
 
 
