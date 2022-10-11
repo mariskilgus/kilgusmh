@@ -6,21 +6,17 @@
   # Zoom into your plot to look at the distribution for different strains.
 #The figure you exported is blank. Make sure you check files after creating them.
 
-install.packages("fitdistrplus")
-library(fitdistrplus)
-install.packages("logspline")
-library(logspline)
-setwd("C:/Users/Kilgus/Documents/GitHub/kilgusmh/Week5/data5")
-data <- read.csv("Figure4Data.csv", header=TRUE)
-data.frame("Figure4Data")
-plot(data$ClusterID)
 install.packages("ggplot2")
 library(ggplot2)
 install.packages("dplyr")
 library(dplyr)
 install.packages("reshape2")
 library(reshape2)
+setwd("C:/Users/Kilgus/Documents/GitHub/kilgusmh/Week5/data5")
 data <- read.csv(file=("c:/Users/Kilgus/Documents/GitHub/kilgusmh/Week5/data5/Figure4Data.csv"), header=T)
+data <- read.csv("Figure4Data.csv", header=TRUE)
+data.frame("Figure4Data")
+plot(data$ClusterID)
 data.new <- data.frame(data[1:4])
 data.new$freq <- data.new$Num.Cells.Progeny
 data.new <- na.omit(data.new)
