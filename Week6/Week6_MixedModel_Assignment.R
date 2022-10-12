@@ -16,52 +16,45 @@ library(MASS)
 install.packages("MuMIn")
 library(MuMIn)
 df
-glmm.mod <- glmmPQL(block temperature carapace.width claw.width toadfish.cue.treatment activity.level prey eaten ~Object, family = gaussian, random = ~ 1 | ID, data = df)
-
-summary(glmm.mod)
-r.squaredGLMM(glmm.mod)
-glmm.mod2 <- glmmPQL(Flight.initiation.distance..FID.~Object + Area, family = gaussian, random = ~ 1 | ID, data = df)
-summary(glmm.mod2)
-r.squaredGLMM(glmm.mod2)
-plot(glmm.mod2)
-hist(df$Flight.initiation.distance..FID.)
-glmm.mod3 <- glmmPQL(Flight.initiation.distance..FID.~Object + Area, family = Gamma, random = ~ 1 | ID, data = df)
-plot(glmm.mod3)
-summary(glmm.mod3)
-r.squaredGLMM(glmm.mod3)
-install.packages("mgcv")
-library(mgcv)
-gam.mod1 <- gam(Flight.initiation.distance..FID.~Object + Area, family = Gamma, random = list(ID=~ 1), data = df)
-summary(gam.mod1)
-plot(gam.mod1$residuals, ylim = c(-.1,.1))
-vis.gam(gam.mod1, view=c("Object","Area"), theta = 45, color = "heat")
-AIC(gam.mod1) 
-gam.mod2 <- gam(Flight.initiation.distance..FID.~ Object*Area, family = Gamma, random = list(ID=~ 1), data = df)
-summary(gam.mod2)
-plot(gam.mod2$residuals, ylim = c(-.1,.1))
-
 # The authors used proportional consumption of prey as the (y) in their model, but did not include this in the dataset.
-  # So we are going to create it - run the following line, assuming df= your data frame (feel free to change that):
+# So we are going to create it - run the following line, assuming df= your data frame (feel free to change that):
 df$prop.cons <- df$eaten/df$prey 
 
-# (Q1) - The code in line 8 is performing two operations at once. What are they? (2 pts)
+glmm.mod <- glmmPQL(prop.cons ~ activity.level + carapace.width + claw.width, family = gaussian, random = ~ 1 | block, data = df)
 
+glmm.mod2 <- glmmPQL(prop.cons ~ activity.level * carapace.width * claw.width, family = gaussian, random = ~ 1 | block, data = df)
+
+dist1 <- glmmPQL(prop.cons ~ activity.level + carapace.width + claw.width, family = binomial, random = ~ 1 | block, data = df)
+
+dist2 <- glmmPQL(prop.cons ~ activity.level * carapace.width * claw.width, family = binomial, random = ~ 1 | block, data = df)
+
+plot(glmm.mod)
+plot(glmm.mod2)
+plot(dist1)
+plot(dist2)
+
+# (Q1) - The code in line 21 is performing two operations at once. What are they? (2 pts)
+#It is comparing eaten and prey. Also, it shows the the proportion consumed of the prey ate.
 
 # (Q2) - Did the interactive effect change which variables predict proportional consumption? How, specifically, did the results change? (5 pts)
-
+summary(dist1)
+summary(dist2)
+#The carapace width determines more than the claw width at predicting the consumption.There were negative results for claw width.
 
 # (Q3) - Plot the residuals of both models. Do you think either model is a good fit? Why or why not? (3 pts)
-
+#gllm.mod1 is the best fit for the model because there is a higher amount of residuals at a lower fitted value.
 
 # Re-run both models as generalized additive models instead (using gam). Then compare the AIC of both models. (4 points each)
+gam.mod1 <- glmmPQL(prop.cons ~ activity.level + carapace.width + claw.width, family = gaussian, random = ~ 1 | block, data = df)
+gam.mod2 <- glmmPQL(prop.cons ~ activity.level * carapace.width * claw.width, family = gaussian, random = ~ 1 | block, data = df)
 AIC(gam.mod1, gam.mod2)
 
 
 # (Q4) - Which model is a better fit? (2 pt)
-
+#gam.mod1
 
 # (Q5) - Based on the residuals of your generalized additive models, how confident are you in these results? (2 pts)
-
+#Somewhat confident since I randomly picked two physical changes that could effect the prediction of the consumption.
 
 
 
