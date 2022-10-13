@@ -1,14 +1,11 @@
 # Load the "anytime" and "ggplot2" packages to complete this week's assignment.
-
 install.packages("anytime")
 library(anytime)
 install.packages("ggplot2")
 library(ggplot2)
 
 # Read the "Plankton_move_average" CSV in from GitHub. 
-
-df <- read.csv("Plankton_move_average.csv")
-
+data <- read.csv("Plankton_move_average.csv")
 # These are data from the Great Lakes Environmental Research Laboratory plankton sampling.
 
 #Used the following lines to format the date and remove NAs from the dataset:
@@ -25,7 +22,7 @@ ggplot(data)  +
   theme_bw() 
 
 # Export this plot to have on hand for reference in the next section of the assignment (and upload with your script).
-
+df
 # (1) - Which species is most likely to be r-selected prey and which its primary predator? (2 pts)
 #
 # What is one relationship the third species MIGHT have to the first two? (2 pts)
