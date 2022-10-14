@@ -35,27 +35,30 @@ plot(dist2)
 
 # (Q1) - The code in line 21 is performing two operations at once. What are they? (2 pts)
 #It is comparing eaten and prey. Also, it shows the the proportion consumed of the prey ate.
+#And it is creating a new column.
 
 # (Q2) - Did the interactive effect change which variables predict proportional consumption? How, specifically, did the results change? (5 pts)
 summary(dist1)
 summary(dist2)
 #The carapace width determines more than the claw width at predicting the consumption.There were negative results for claw width.
+#True, but how is this related to additive vs interactive effects?
 
 # (Q3) - Plot the residuals of both models. Do you think either model is a good fit? Why or why not? (3 pts)
 #gllm.mod1 is the best fit for the model because there is a higher amount of residuals at a lower fitted value.
+#Neither is a good fit because of the patterns in the residuals.
 
 # Re-run both models as generalized additive models instead (using gam). Then compare the AIC of both models. (4 points each)
 gam.mod1 <- glmmPQL(prop.cons ~ activity.level + carapace.width + claw.width, family = gaussian, random = ~ 1 | block, data = df)
 gam.mod2 <- glmmPQL(prop.cons ~ activity.level * carapace.width * claw.width, family = gaussian, random = ~ 1 | block, data = df)
 AIC(gam.mod1, gam.mod2)
-
+#This are not gam models. Need to use gam() not glmmPQL() which is the identical model to what you created above.
 
 # (Q4) - Which model is a better fit? (2 pt)
 #gam.mod1
 
 # (Q5) - Based on the residuals of your generalized additive models, how confident are you in these results? (2 pts)
 #Somewhat confident since I randomly picked two physical changes that could effect the prediction of the consumption.
-
+#This answer is not based on residuals.
 
 
 
