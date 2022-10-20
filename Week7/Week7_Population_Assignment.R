@@ -5,6 +5,7 @@ install.packages("ggplot2")
 library(ggplot2)
 
 # Read the "Plankton_move_average" CSV in from GitHub. 
+setwd("C:/Users/kilgus/Documents/GitHub/kilgusmh/Week7")
 data <- read.csv("Plankton_move_average.csv")
 # These are data from the Great Lakes Environmental Research Laboratory plankton sampling.
 
@@ -13,17 +14,20 @@ data$Date <- as.Date(data$Date, origin = "0001-01-01") # Setting values to "day 
 data <- na.omit(data)
 
 #Plot these population data over time with the following code:
-ggplot(data)  +
-  xlab("Numeric Date") + ylab("Density Individuals")+
-  geom_line(data=data, aes(Date, D.mendotae), color="black", alpha = 0.7, size=1)+
-  geom_line(data=data, aes(Date, LimncalanusF+LimncalanusM), color="orange",  alpha = 0.7, size=1)+ # adding males and females together, hint: this is actually spelled Limnocalanus
-  geom_line(data=data, aes(Date, Bythotrephes), color="sky blue",  alpha = 0.7, size=1)+
-  geom_line(data=data, aes(Date, Bythotrephes), color="sky blue",  alpha = 0.7, size=1)+
-  theme_bw() 
+plot(data)
+ggplot(data)
+xlab("Numeric Date") + ylab("Density Individuals")
+geom_line(data=data, aes(Date, D.mendotae), color="black", alpha = 0.7, size=1)
+geom_line(data=data, aes(Date, LimncalanusF+LimncalanusM), color="orange",  alpha = 0.7, size=1)
+# adding males and females together, hint: this is actually spelled Limnocalanus
+geom_line(data=data, aes(Date, Bythotrephes), color="sky blue",  alpha = 0.7, size=1)
+geom_line(data=data, aes(Date, Bythotrephes), color="sky blue",  alpha = 0.7, size=1)
+theme_bw() 
 
 # Export this plot to have on hand for reference in the next section of the assignment (and upload with your script).
 df
 # (1) - Which species is most likely to be r-selected prey and which its primary predator? (2 pts)
+
 #
 # What is one relationship the third species MIGHT have to the first two? (2 pts)
 #
