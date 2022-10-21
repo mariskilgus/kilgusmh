@@ -1,5 +1,4 @@
 # Load the "anytime" and "ggplot2" packages to complete this week's assignment.
-<<<<<<< HEAD
 
 # Read the "Plankton_move_average" CSV in from GitHub. 
 # These are data from the Great Lakes Environmental Research Laboratory plankton sampling.
@@ -66,12 +65,23 @@ df
 #Now copy/paste in the Lotka-Volterra function, plotting script, and load the "deSolve" package from the tutorial:
 install.packages("deSolve")
 library(deSolve)
-dev.off()
-LotVmod <- function (Time, State, Pars) '{with(as.list(c(State, Pars)), {dx = x*(alpha - beta*y)dy = -y*(gamma - delta*x)return(list(c(dx, dy)))'
 
+# To create these plots and view in the full window, we need to remove the par() settings for multipanel plots.
+# This is done with the dev.off() function
+dev.off()
+
+#create the Lotka-Volterra function we will be using with this operation.
+
+LotVmod <- function (Time, State, Pars) {
+  with(as.list(c(State, Pars)), {
+    dx = x*(alpha - beta*y)
+    dy = -y*(gamma - delta*x)
+    return(list(c(dx, dy)))
+  })
+}
 
 # (2) - What do alpha, beta, gamma, and delta represent in this function? (4 pts)
-#They are each of the variables for predator and prey.
+#They are each of the sizes used for to create the graph.
 
 # (3) - By only changing values for alpha, beta, gamma, and/or delta
 Pars <- c(alpha = 2, beta = 0.5, gamma = .2, delta = .6) 
@@ -84,55 +94,49 @@ Time <- seq(0, 100, by = 1)
 out <- as.data.frame(ode(func = LotVmod, y = State, parms = Pars, times = Time)) 
 
 matplot(out[,-1], type = "l", xlab = "time", ylab = "population")
-legend("topright", c("Rabid foxes", "Cute bunnies"), lty = c(1,2), col = c(1,2), box.lwd = 0)
+legend("topright", c("Limncalanus", "D.mendotae"), lty = c(1,2), col = c(1,2), box.lwd = 0)
 
 # Increase in alpha:
 Pars <- c(alpha = 4, beta = 0.5, gamma = .2, delta = .6)
 out <- as.data.frame(ode(func = LotVmod, y = State, parms = Pars, times = Time))
 matplot(out[,-1], type = "l", xlab = "time", ylab = "population")
-legend("topright", c("Rabid foxes", "Cute bunnies"), lty = c(1,2), col = c(1,2), box.lwd = 0)
+legend("topright", c("Limncalanus", "D.mendotae"), lty = c(1,2), col = c(1,2), box.lwd = 0)
 
 #Decrease in alpha:
 Pars <- c(alpha = 1, beta = 0.5, gamma = .2, delta = .6)
 out <- as.data.frame(ode(func = LotVmod, y = State, parms = Pars, times = Time))
 matplot(out[,-1], type = "l", xlab = "time", ylab = "population")
-legend("topright", c("Rabid foxes", "Cute bunnies"), lty = c(1,2), col = c(1,2), box.lwd = 0)
+legend("topright", c("Limncalanus", "D.mendotae"), lty = c(1,2), col = c(1,2), box.lwd = 0)
 
 #Increase in beta:
 Pars <- c(alpha = 2, beta = 0.7, gamma = .2, delta = .6)
 out <- as.data.frame(ode(func = LotVmod, y = State, parms = Pars, times = Time))
 matplot(out[,-1], type = "l", xlab = "time", ylab = "population")
-legend("topright", c("Rabid foxes", "Cute bunnies"), lty = c(1,2), col = c(1,2), box.lwd = 0)
+legend("topright", c("Limncalanus", "D.mendotae"), lty = c(1,2), col = c(1,2), box.lwd = 0)
 
 #Decrease in beta:
 Pars <- c(alpha = 2, beta = 0.5, gamma = .2, delta = .6)
 out <- as.data.frame(ode(func = LotVmod, y = State, parms = Pars, times = Time))
 matplot(out[,-1], type = "l", xlab = "time", ylab = "population")
-legend("topright", c("Rabid foxes", "Cute bunnies"), lty = c(1,2), col = c(1,2), box.lwd = 0)
+legend("topright", c("Limncalanus", "D.mendotae"), lty = c(1,2), col = c(1,2), box.lwd = 0)
 
 #Increase in gamma:
 Pars <- c(alpha = 2, beta = 0.5, gamma = .3, delta = .6)
 out <- as.data.frame(ode(func = LotVmod, y = State, parms = Pars, times = Time))
 matplot(out[,-1], type = "l", xlab = "time", ylab = "population")
-legend("topright", c("Rabid foxes", "Cute bunnies"), lty = c(1,2), col = c(1,2), box.lwd = 0)
-
-#Decrease in gamma:
-Pars <- c(alpha = 2, beta = 0.5, gamma = .1, delta = .6)
-out <- as.data.frame(ode(func = LotVmod, y = State, parms = Pars, times = Time))
-matplot(out[,-1], type = "l", xlab = "time", ylab = "population")
-legend("topright", c("Rabid foxes", "Cute bunnies"), lty = c(1,2), col = c(1,2), box.lwd = 0)
+legend("topright", c("Limncalanus", "D.mendotae"), lty = c(1,2), col = c(1,2), box.lwd = 0)
 
 #Increase in delta:
 Pars <- c(alpha = 2, beta = 0.5, gamma = .2, delta = .7)
 out <- as.data.frame(ode(func = LotVmod, y = State, parms = Pars, times = Time))
 matplot(out[,-1], type = "l", xlab = "time", ylab = "population")
-legend("topright", c("Rabid foxes", "Cute bunnies"), lty = c(1,2), col = c(1,2), box.lwd = 0)
+legend("topright", c("Limncalanus", "D.mendotae"), lty = c(1,2), col = c(1,2), box.lwd = 0)
 
 # Decrease in delta:
 Pars <- c(alpha = 2, beta = 0.5, gamma = .2, delta = .4)
 out <- as.data.frame(ode(func = LotVmod, y = State, parms = Pars, times = Time))
 matplot(out[,-1], type = "l", xlab = "time", ylab = "population")
-legend("topright", c("Rabid foxes", "Cute bunnies"), lty = c(1,2), col = c(1,2), box.lwd = 0)
+legend("topright", c("Limncalanus", "D.mendotae"), lty = c(1,2), col = c(1,2), box.lwd = 0)
 
 # change the default parameters of the L-V model to best approximate the relationship between Limncalanus and D.mendotae, assuming both plots are on the same time scale.
 # What are the changes you've made to alpha, beta, gamma, and delta from the default values; and what do they say in a relative sense about the plankton data? (4 pts)
@@ -140,8 +144,6 @@ legend("topright", c("Rabid foxes", "Cute bunnies"), lty = c(1,2), col = c(1,2),
 
 # Are there other paramenter changes that could have created the same end result? (2 pts)
 #
-
->>>>>>> fa4c085086048e9a89da6ea1b502ff089cd148a6
 # Export your final L-V plot with a legend that includes the appropriate genus and/or species name as if the model results were the real plankton data, 
 # and upload with your script. (hint - remember which one is the predator and which is the prey)
 
