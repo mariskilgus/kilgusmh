@@ -41,25 +41,20 @@ setwd("C:/Users/kilgus/Documents/GitHub/kilgusmh/Week7")
 data <- read.csv("Plankton_move_average.csv")
 # These are data from the Great Lakes Environmental Research Laboratory plankton sampling.
 
+
 #Used the following lines to format the date and remove NAs from the dataset:
-data$Date <- as.Date(data$Date, origin = "0001-01-01") 
-# Setting values to "day zero".
+data$Date <- as.Date(data$Date, origin = "0001-01-01") # Setting values to "day zero".
 data <- na.omit(data)
 
 #Plot these population data over time with the following code:
-plot(data)
+ggplot(data)  +
+  xlab("Numeric Date") + ylab("Density Individuals")+
+  geom_line(data=data, aes(Date, D.mendotae), color="black", alpha = 0.7, size=1)+
+  geom_line(data=data, aes(Date, LimncalanusF+LimncalanusM), color="orange",  alpha = 0.7, size=1)+ # adding males and females together, hint: this is actually spelled Limnocalanus
+  geom_line(data=data, aes(Date, Bythotrephes), color="sky blue",  alpha = 0.7, size=1)+
+  geom_line(data=data, aes(Date, Bythotrephes), color="sky blue",  alpha = 0.7, size=1)+
+  theme_bw()
 
-ggplot(data)
-
-xlab("NumericDate") + ylab("DensityIndividuals")
-
-geom_line(data=data, aes(Date, D.mendotae), color="black", alpha = 0.7, size=1)
-geom_line(data=data, aes(Date, LimncalanusF+LimncalanusM), color="orange",  alpha = 0.7, size=1)
-# adding males and females together, hint: this is actually spelled Limnocalanus
-geom_line(data=data, aes(Date, Bythotrephes), color="sky blue",  alpha = 0.7, size=1)
-geom_line(data=data, aes(Date, Bythotrephes), color="sky blue",  alpha = 0.7, size=1)
-
-theme_bw() 
 
 # Export this plot to have on hand for reference in the next section of the assignment (and upload with your script).
 df
