@@ -4,8 +4,9 @@
 # (Q1 - 12 pts) Use the dataset from the tutorial to complete one redundancy analysis (RDA) with variance partitioning on a different community (NOT the nematodes).
 #Abiotic v invertebrate community,not soil plants.
 
-install.packages("readx1")
+install.packages("readxl")
 library(readxl)
+
 
 setwd("C:/Users/kilgus/Documents/GitHub/kilgusmh/Week9")
 abiotic.tibble <- read_excel("Penaetal_2016_data.xlsx", sheet = "Abiotic factors")
@@ -21,19 +22,71 @@ boxplot(Kalium ~ Land_Use, data= abiotic, main = "K by Land Use")
 boxplot(totalN ~ Site, data= abiotic, main = "N by Site")
 boxplot(totalN ~ Land_Use, data= abiotic, main = "N by Land Use")
 
-nema.tibble <- read_excel("Penaetal_2016_data.xlsx", sheet = "Invertebrate_community")
-nema <- as.data.frame(nema.tibble)
+
+
+inver.tibble <- read_excel("Penaetal_2016_data.xlsx", sheet = "Invertebrate_community")
+inver <- as.data.frame(inver.tibble)
 head(inver)
-abiotic.names <- paste(abiotic$Site, abiotic$Land_Use, abiotic$Plot)
+abiotic.names <- paste(inver$Parcel, inver$Landuse)
 abiotic$names <- abiotic.names
 
 head(abiotic)
+
+
+abiotic.names <- paste(inver$Parcel, inver$Landuse)
+
+abiotic$names <- abiotic.names
+
+head(abiotic)
+
+inver.names <- paste(inver$Parcel, inver$Landuse)
+inver$names <- inver.names
+
+abiotic.means <- aggregate(x = abiotic, by = list(abiotic$names), FUN = "mean")
+
+head(abiotic.means)
+
+inver.means <- aggregate(x = inver, by = list(inver$names), FUN = "mean")
+
+head(inver.means)
+
+abiotic.means1 <- abiotic.means[,-16] # NA column
+abiotic.means2 <- abiotic.means1[,-1:-6] # Plot and NA columns
+abiotic.means2 <- sapply(abiotic.means2, as.numeric ) # Make sure everything is numeric.
+abiotic.means2 <- as.data.frame(abiotic.means2)
+
+inver.means1 <- inver.means[,-41] # Remove NAs
+inver.means2 <- as.data.frame(inver.means1[,-1:-4]) # Remove plot and NAs
+inver.means2 <- sapply(inver.means2, as.numeric )
 
 
   # Explain the ecological importance of your significant predictor variables, or the importance if none are significant for your community.
 #
 
 # (Q2 - 12 pts) Then use the dataset from the tutorial to create a linear model related to your RDA. Try multiple predictors to find the best fit model.
+# And we can FINALLY compare the abiotic data against the biotic communities:
+library(vegan)
+ord <- rda(inver.means2[-20,] ~ pH + totalN + Perc_ash + Kalium + Magnesium + Ca + Al + TotalP + OlsenP, abiotic.means2)
+ord
+
+
+anova(ord)  
+
+plot(ord, ylim = c(-2,2), xlim = c(-5,5))  
+
+ord <- rda(inver.means2 ~., abiotic.means2) 
+ord.int <- rda(inver.means2 ~1, abiotic.means2)
+
+step.mod <- ordistep(ord.int, scope = formula(ord), selection = "both")
+step.mod$anova
+
+step.R2mod <- ordiR2step(ord.int, scope = formula(ord), selection = "forward")
+
+ord2 <- rda(inver.means2 ~ totalN, abiotic.means2)
+ord2
+anova(ord2)
+plot(ord2)
+
 
   # Explain the ecological importance of the significant predictors, or lack of significant predictors.
 #

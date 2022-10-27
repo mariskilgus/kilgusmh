@@ -8,7 +8,7 @@
 # We will use the readxl package and read_excel() function to convert individual sheets into data frames.
 
 library(readxl)
-
+setwd("C:/Users/kilgus/Documents/GitHub/R4Eco_2022/Week9")
 setwd("C:/GitHub/R4Eco_2022/Week9")
 
 # First, read in the abiotic data:
