@@ -5,7 +5,7 @@
 #Abiotic v invertebrate community,not soil plants.
 
 install.packages("readxl")
-library(readxl)
+library("readxl")
 
 
 setwd("C:/Users/kilgus/Documents/GitHub/kilgusmh/Week9")
@@ -27,17 +27,12 @@ boxplot(totalN ~ Land_Use, data= abiotic, main = "N by Land Use")
 inver.tibble <- read_excel("Penaetal_2016_data.xlsx", sheet = "Invertebrate_community")
 inver <- as.data.frame(inver.tibble)
 head(inver)
-abiotic.names <- paste(inver$Parcel, inver$Landuse)
+
+abiotic.names <- paste(abiotic$Parcel, abiotic$Land_Use)
 abiotic$names <- abiotic.names
 
 head(abiotic)
 
-
-abiotic.names <- paste(inver$Parcel, inver$Landuse)
-
-abiotic$names <- abiotic.names
-
-head(abiotic)
 
 inver.names <- paste(inver$Parcel, inver$Landuse)
 inver$names <- inver.names
@@ -65,17 +60,17 @@ inver.means2 <- sapply(inver.means2, as.numeric )
 
 # (Q2 - 12 pts) Then use the dataset from the tutorial to create a linear model related to your RDA. Try multiple predictors to find the best fit model.
 # And we can FINALLY compare the abiotic data against the biotic communities:
+install.packages("vegan")
 library(vegan)
-ord <- rda(inver.means2[-20,] ~ pH + totalN + Perc_ash + Kalium + Magnesium + Ca + Al + TotalP + OlsenP, abiotic.means2)
+ord <- rda(inver.means2[-20,-68] ~ pH + totalN + Perc_ash + Kalium + Magnesium + Ca + Al + TotalP + OlsenP, abiotic.means2)
 ord
-
-
+#ncol(inver.means2)
 anova(ord)  
 
 plot(ord, ylim = c(-2,2), xlim = c(-5,5))  
 
-ord <- rda(inver.means2 ~., abiotic.means2) 
-ord.int <- rda(inver.means2 ~1, abiotic.means2)
+ord <- rda(inver.means2[-20,-68] ~., abiotic.means2) 
+ord.int <- rda(inver.means2[-20,-68] ~1, abiotic.means2)
 
 step.mod <- ordistep(ord.int, scope = formula(ord), selection = "both")
 step.mod$anova
@@ -89,7 +84,7 @@ plot(ord2)
 
 
   # Explain the ecological importance of the significant predictors, or lack of significant predictors.
-#
+#Nitrogen is significant 
 
 # (Q3 - 6 pts) Provide a 3-4 sentence synthesis of how these results relate to one another and the value of considering both together for interpreting biotic-abiotic interactions.
 #
