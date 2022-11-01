@@ -10,6 +10,7 @@ library("readxl")
 
 setwd("C:/Users/kilgus/Documents/GitHub/kilgusmh/Week9")
 abiotic.tibble <- read_excel("Penaetal_2016_data.xlsx", sheet = "Abiotic factors")
+
 abiotic <- as.data.frame(abiotic.tibble)
 
 head(abiotic)
@@ -56,7 +57,7 @@ inver.means2 <- sapply(inver.means2, as.numeric )
 
 
   # Explain the ecological importance of your significant predictor variables, or the importance if none are significant for your community.
-#
+#Out of all the box plots, the pH by site for almoeseniebos..muizenbos is the most significant predictor variable because there is the most amount of difference between the three sites.The pH lowered or raised can alter the amount and type of vegetation growing. Thus, creating different types of food in different places/sites.
 
 # (Q2 - 12 pts) Then use the dataset from the tutorial to create a linear model related to your RDA. Try multiple predictors to find the best fit model.
 # And we can FINALLY compare the abiotic data against the biotic communities:
@@ -77,15 +78,15 @@ step.mod$anova
 
 step.R2mod <- ordiR2step(ord.int, scope = formula(ord), selection = "forward")
 
-ord2 <- rda(inver.means2 ~ totalN, abiotic.means2)
+ord2 <- rda(inver.means2[-20,-68] ~ totalN, abiotic.means2)
 ord2
 anova(ord2)
 plot(ord2)
 
 
   # Explain the ecological importance of the significant predictors, or lack of significant predictors.
-#Nitrogen is significant 
+#Nitrogen is significant to the soil and what vegetation can grow.
 
 # (Q3 - 6 pts) Provide a 3-4 sentence synthesis of how these results relate to one another and the value of considering both together for interpreting biotic-abiotic interactions.
-#
+#Nitrogen is significant to invertebrate communities because if nitrogen affects the soil, there could be less vegetation. This causes a lack of food for invertebrates. Additionally, with a significant addition of nitrogen in a water sources could potentially kill invertebrates.Thus, reducing the population and changing the entire ecosystem.
 
