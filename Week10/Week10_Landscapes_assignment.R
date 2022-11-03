@@ -16,14 +16,14 @@ library(vegan)
 #Groupings by habits include the swimmers (off limits for the assignment) as most mobile, sprawlers as 2nd (they move in search of food, but not quickly),
     #and the clingers come in last (they might move up and down on individual rocks).
 
-Diptera.csv <- read.csv("Diptera.csv", header=T)
+PatchLatLon.csv <- read.csv("PatchLatLon.csv", header=T)
 Trichoptera.csv <- read.csv("Trichoptera.csv", header=T)
-Ephememeroptera.csv <- read.csv("Ephemeroptera.csv", header=T)
+HabitatbyPatch.csv <- read.csv("HabitatbyPatch.csv", header=T)
 NonInsects.csv <- read.csv("NonInsects.csv", header=T)
 
-Diptera.mat <- as.matrix(Diptera.csv[,-1])
+PatchLatLon.mat <- as.matrix(PatchLatLon.csv[,-1])
 Trichoptera.mat <- as.matrix(Trichoptera.csv)
-Ephememeroptera.mat <- as.matrix(Ephememeroptera.csv)
+HabitatbyPatch.mat <- as.matrix(HabitatbyPatch.csv)
 NonInsects.mat <- as.matrix(NonInsects.csv)
 
 nb<-cell2nb(3,30,"queen") #three columns, 30 rows long, 90 nodes.
@@ -32,9 +32,9 @@ nb2 <- droplinks(nb1, 22, sym=TRUE)
 nb3 <- droplinks(nb2, 25, sym=TRUE)
 nb4 <- droplinks(nb3, 30, sym=TRUE)
 
-bin.mat <- aem.build.binary(nb4, Diptera.mat, unit.angle = "degrees", rot.angle = 90, rm.same.y = TRUE, plot.connexions = TRUE)
+bin.mat <- aem.build.binary(nb4, PatchLatLon.mat, unit.angle = "degrees", rot.angle = 90, rm.same.y = TRUE, plot.connexions = TRUE)
 
-plot(Diptera.mat[,2]~Diptera.mat[,3], xlim = rev(c(76.75,77)))
+plot(PatchLatLon.mat[,2]~PatchLatLon.mat[,3], xlim = rev(c(76.75,77)))
 aem.ev <- aem(aem.build.binary=bin.mat)
 aem.df <- aem.ev$vectors[c(-19,-22,-25,-30),]
 aem.df
@@ -45,9 +45,9 @@ Space.r2a <- RsquareAdj(Space.rda)$adj.r.squared
 aem.fwd <- forward.sel(Trichoptera.mat,aem.df, adjR2thresh=Space.r2a)
 aem.fwd$order
 
-SpaceNoEph.rda <- rda(Trichoptera.mat, as.data.frame(aem.df[,aem.fwd$order]), Ephemeroptera.mat)
+SpaceNoEph.rda <- rda(Trichoptera.mat, as.data.frame(aem.df[,aem.fwd$order]), HabitatbyPatch.mat)
 SpaceNoEph.rda 
-anova(SpaceNoEph.rda, perm.max = 10000)
+anova(SpaceNoHab.rda, perm.max = 10000)
 RsquareAdj(SpaceNoEph.rda)
 
 
