@@ -45,16 +45,16 @@ Space.r2a <- RsquareAdj(Space.rda)$adj.r.squared
 aem.fwd <- forward.sel(Trichoptera.mat,aem.df, adjR2thresh=Space.r2a)
 aem.fwd$order
 
-SpaceNoEph.rda <- rda(Trichoptera.mat, as.data.frame(aem.df[,aem.fwd$order]), HabitatbyPatch.mat)
-SpaceNoEph.rda 
+SpaceNoHab.rda <- rda(Trichoptera.mat, as.data.frame(aem.df[,aem.fwd$order]), HabitatbyPatch.mat)
+SpaceNoHab.rda 
 anova(SpaceNoHab.rda, perm.max = 10000)
-RsquareAdj(SpaceNoEph.rda)
+RsquareAdj(SpaceNoHab.rda)
 
 
-EphNoSpace.rda <- rda(Trichoptera.mat, Ephemeroptera.mat, as.data.frame(aem.df[,aem.fwd$order]))
-EphNoSpace.rda 
-anova(EphNoSpace.rda, perm.max = 10000)
-RsquareAdj(EphNoSpace.rda)
+HabNoSpace.rda <- rda(Trichoptera.mat, HabitatbyPatch.mat, as.data.frame(aem.df[,aem.fwd$order]))
+HabNoSpace.rda 
+anova(HabNoSpace.rda, perm.max = 10000)
+RsquareAdj(HabNoSpace.rda)
 
 NonISpace.rda <- rda(NonInsects.mat, as.data.frame(aem.df))
 NonISpace.r2a <- RsquareAdj(NonISpace.rda)$adj.r.squared
@@ -62,15 +62,15 @@ NonISpace.r2a <- RsquareAdj(NonISpace.rda)$adj.r.squared
 NonIaem.fwd <- forward.sel(NonInsects.mat,as.data.frame(aem.df), adjR2thresh=Space.r2a)
 
 
-NonISpaceNoHab.rda <- rda(NonInsects.mat, as.data.frame(aem.df[,NonIaem.fwd$order]), Ephemeroptera.mat)
+NonISpaceNoHab.rda <- rda(NonInsects.mat, as.data.frame(aem.df[,NonIaem.fwd$order]), HabitatbyPatch.mat)
 NonISpaceNoHab.rda 
 anova(NonISpaceNoEph.rda, perm.max = 10000)
 RsquareAdj(NonISpaceNoEph.rda)
 
-NonIEphNoSpace.rda <- rda(NonInsects.mat, Ephemeroptera.mat, as.data.frame(aem.df[,NonIaem.fwd$order]))
-NonIEphNoSpace.rda 
-anova (NonIEphNoSpace.rda, perm.max = 10000)
-RsquareAdj(NonIEphNoSpace.rda)
+NonIHabNoSpace.rda <- rda(NonInsects.mat, HabitatbyPatch.mat, as.data.frame(aem.df[,NonIaem.fwd$order]))
+NonIHabNoSpace.rda 
+anova (NonIHabNoSpace.rda, perm.max = 10000)
+RsquareAdj(NonIHabNoSpace.rda)
 
 
 

@@ -54,13 +54,6 @@ abiotic.means2 <- as.data.frame(abiotic.means2)
 inver.means1 <- inver.means[,-41] # Remove NAs
 inver.means2 <- as.data.frame(inver.means1[,-1:-4]) # Remove plot and NAs
 inver.means2 <- sapply(inver.means2, as.numeric )
-
-
-  # Explain the ecological importance of your significant predictor variables, or the importance if none are significant for your community.
-#Out of all the box plots, the pH by site for almoeseniebos..muizenbos is the most significant predictor variable because there is the most amount of difference between the three sites.The pH lowered or raised can alter the amount and type of vegetation growing. Thus, creating different types of food in different places/sites.
-
-# (Q2 - 12 pts) Then use the dataset from the tutorial to create a linear model related to your RDA. Try multiple predictors to find the best fit model.
-# And we can FINALLY compare the abiotic data against the biotic communities:
 install.packages("vegan")
 library(vegan)
 ord <- rda(inver.means2[-20,-68] ~ pH + totalN + Perc_ash + Kalium + Magnesium + Ca + Al + TotalP + OlsenP, abiotic.means2)
@@ -82,6 +75,69 @@ ord2 <- rda(inver.means2[-20,-68] ~ totalN, abiotic.means2)
 ord2
 anova(ord2)
 plot(ord2)
+
+
+
+  # Explain the ecological importance of your significant predictor variables, or the importance if none are significant for your community.
+#Out of all the box plots, the pH by site for almoeseniebos..muizenbos is the most significant predictor variable because there is the most amount of difference between the three sites.The pH lowered or raised can alter the amount and type of vegetation growing. Thus, creating different types of food in different places/sites.
+
+
+# (Q2 - 12 pts) Then use the dataset from the tutorial to create a linear model related to your RDA. Try multiple predictors to find the best fit model.
+# And we can FINALLY compare the abiotic data against the biotic communities:
+
+abiotic.means2$Parcel <- unique(abiotic$Parcel)
+
+soil.plants <- merge(abiotic.means2, plants, by = "Parcel")
+
+View(soil.plants)
+
+library(fitdistrplus)
+library(logspline)
+
+colnames(inver)
+
+mod1 <- lm(Land_use ~ pH + totalN + Kalium + Magnesium + Ca + Al + TotalP + Land_use + inver)
+summary(mod1)
+anova(mod1)
+AIC(mod1)
+
+summary(mod1)$adj.r.squared
+
+mod2 <- lm(Leaves ~ pH + totalN + Kalium + Species_code,soil.plants)
+summary(mod2)
+anova(mod2)
+AIC(mod1,mod2)
+
+plot(mod2$residuals)
+
+summary(mod2)$adj.r.squared
+mod3 <- lm(Leaves ~ pH + totalN + Species_code,soil.plants)
+summary(mod3)
+anova(mod3)
+AIC(mod2, mod3)
+plot(mod3$residuals)
+summary(mod3)$adj.r.squared
+
+mod4 <- lm(Leaves ~ pH*totalN*Kalium + Species_code,soil.plants)
+summary(mod4)
+anova(mod4)
+AIC(mod2,mod3,mod4)
+plot(mod4$residuals)
+summary(mod4)$adj.r.squared
+
+mod5 <- lm(Leaves ~ pH + Kalium + totalN*Species_code,soil.plants)
+summary(mod5)
+anova(mod5)
+AIC(mod2,mod3,mod4,mod5)
+plot(mod5$residuals)
+summary(mod5)$adj.r.squared
+
+mod6 <- lm(Leaves ~ Kalium + pH*totalN*Species_code,soil.plants)
+summary(mod6)
+anova(mod6)
+AIC(mod2,mod3,mod4,mod5,mod6)
+plot(mod6$residuals)
+summary(mod6)$adj.r.squared
 
 
   # Explain the ecological importance of the significant predictors, or lack of significant predictors.
