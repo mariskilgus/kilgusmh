@@ -8,7 +8,8 @@ install.packages("readxl")
 library("readxl")
 
 
-setwd("C:/Users/kilgus/Documents/GitHub/kilgusmh/Week9")
+setwd("C:/Users/kilgus/Documents/GitHub/kilgusmh/Week9")#This is not where the working directory should point.
+setwd("C:/GitHub/kilgusmh/Week9")
 abiotic.tibble <- read_excel("Penaetal_2016_data.xlsx", sheet = "Abiotic factors")
 
 abiotic <- as.data.frame(abiotic.tibble)
@@ -81,7 +82,7 @@ plot(ord2)
 
   # Explain the ecological importance of your significant predictor variables, or the importance if none are significant for your community.
 #Out of all the box plots, the pH by site for almoeseniebos..muizenbos is the most significant predictor variable because there is the most amount of difference between the three sites.The pH lowered or raised can alter the amount and type of vegetation growing. Thus, creating different types of food in different places/sites.
-
+#This has nothing to do with the RDA. From your code, only total nitrogen is a significant predictor of the community, so your answer should have been about nitrogen.
 
 # (Q2 - 12 pts) Then use the dataset from the tutorial to create a linear model related to your RDA. Try multiple predictors to find the best fit model.
 # And we can FINALLY compare the abiotic data against the biotic communities:
@@ -141,5 +142,7 @@ summary(mod6)$adj.r.squared#yay, it worked!
 #Nitrogen is significant to the soil and what vegetation can grow.
 
 # (Q3 - 6 pts) Provide a 3-4 sentence synthesis of how these results relate to one another and the value of considering both together for interpreting biotic-abiotic interactions.
-#Nitrogen is significant to invertebrate communities because if nitrogen affects the soil, there could be less vegetation. This causes a lack of food for invertebrates. Additionally, with a significant addition of nitrogen in a water sources could potentially kill invertebrates.Thus, reducing the population and changing the entire ecosystem.
-
+#Nitrogen is significant to invertebrate communities because if nitrogen affects the soil, there could be less vegetation. 
+#This causes a lack of food for invertebrates. Additionally, with a significant addition of nitrogen in a water sources could potentially kill invertebrates.
+#Thus, reducing the population and changing the entire ecosystem.
+#Increased nitrogen generally causes increased plant growth. Otherwise this is in the right direction.
