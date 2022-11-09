@@ -19,12 +19,12 @@ library(vegan)
 PatchLatLon.csv <- read.csv("PatchLatLon.csv", header=T)
 Trichoptera.csv <- read.csv("Trichoptera.csv", header=T)
 HabitatbyPatch.csv <- read.csv("HabitatbyPatch.csv", header=T)
-NonInsects.csv <- read.csv("NonInsects.csv", header=T)
+Clingers.csv <- read.csv("Clingers.csv", header=T)
 
 PatchLatLon.mat <- as.matrix(PatchLatLon.csv[,-1])
 Trichoptera.mat <- as.matrix(Trichoptera.csv)
 HabitatbyPatch.mat <- as.matrix(HabitatbyPatch.csv)
-NonInsects.mat <- as.matrix(NonInsects.csv)
+Clingers.mat <- as.matrix(Clingers.csv)
 
 nb<-cell2nb(3,30,"queen") #three columns, 30 rows long, 90 nodes.
 nb1 <- droplinks(nb, 19, sym=TRUE) #these drop specific values from the network based on missing data points.
@@ -56,18 +56,18 @@ HabNoSpace.rda
 anova(HabNoSpace.rda, perm.max = 10000)
 RsquareAdj(HabNoSpace.rda)
 
-NonISpace.rda <- rda(NonInsects.mat, as.data.frame(aem.df))
+NonISpace.rda <- rda(Clingers.mat, as.data.frame(aem.df))
 NonISpace.r2a <- RsquareAdj(NonISpace.rda)$adj.r.squared
 
-NonIaem.fwd <- forward.sel(NonInsects.mat,as.data.frame(aem.df), adjR2thresh=Space.r2a)
+NonIaem.fwd <- forward.sel(Clingers.mat,as.data.frame(aem.df), adjR2thresh=Space.r2a)
 
 
-NonISpaceNoHab.rda <- rda(NonInsects.mat, as.data.frame(aem.df[,NonIaem.fwd$order]), HabitatbyPatch.mat)
+NonISpaceNoHab.rda <- rda(Clingers.mat, as.data.frame(aem.df[,NonIaem.fwd$order]), HabitatbyPatch.mat)
 NonISpaceNoHab.rda 
-anova(NonISpaceNoEph.rda, perm.max = 10000)
-RsquareAdj(NonISpaceNoEph.rda)
+anova(NonISpaceNoHab.rda, perm.max = 10000)
+RsquareAdj(NonISpaceNoHab.rda)
 
-NonIHabNoSpace.rda <- rda(NonInsects.mat, HabitatbyPatch.mat, as.data.frame(aem.df[,NonIaem.fwd$order]))
+NonIHabNoSpace.rda <- rda(Clingers.mat, HabitatbyPatch.mat, as.data.frame(aem.df[,NonIaem.fwd$order]))
 NonIHabNoSpace.rda 
 anova (NonIHabNoSpace.rda, perm.max = 10000)
 RsquareAdj(NonIHabNoSpace.rda)
@@ -91,3 +91,4 @@ RsquareAdj(NonIHabNoSpace.rda)
 
 #Part 4: How do you expect selecting both the spatial and the habitat variables would change the results of the RDAs from Part 1 above? (5 points)
   #(You do not need to redo the RDAs, unless you *want* to.)
+
