@@ -75,6 +75,10 @@ RsquareAdj(NonIHabNoSpace.rda)
 
 
 #Part 2: What is your interpretation of the pattern for each group individually, and the two in comparison, based on their mobility? (5 points)
+#There is 49% for space in Clingers, which means they move slowly.The Trichoptera have a 2.46% in no space, so they move faster.
+
+
+
 
 
 #Part 3: For each of your chosen groups of bugs, perform variable selection for the habitat data rather than the AEM data. Which habitat variables are significant for each? (10 points)
@@ -88,7 +92,14 @@ RsquareAdj(NonIHabNoSpace.rda)
     #Fines = Percent of the substrate as "fines" i.e. small particles too small to measure
     #AveAr = The average size of rocks where each sample was collected
 
+Habitat.rda <- rda(Trichoptera.mat, as.data.frame(Habitat.df))
+Habitat.r2a <- RsquareAdj(Habitat.rda)$adj.r.squared
+
+Habitat.fwd <- forward.sel(Trichoptera.mat,Habitat.df, adjR2thresh=Space.r2a)
+
+#
 
 #Part 4: How do you expect selecting both the spatial and the habitat variables would change the results of the RDAs from Part 1 above? (5 points)
   #(You do not need to redo the RDAs, unless you *want* to.)
+#
 
