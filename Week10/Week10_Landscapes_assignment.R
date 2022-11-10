@@ -92,10 +92,10 @@ RsquareAdj(NonIHabNoSpace.rda)
     #Fines = Percent of the substrate as "fines" i.e. small particles too small to measure
     #AveAr = The average size of rocks where each sample was collected
 
-Habitat.rda <- rda(Trichoptera.mat, as.data.frame(Habitat.df))
-Habitat.r2a <- RsquareAdj(Habitat.rda)$adj.r.squared
+HabitatbyPatch.rda <- rda(Trichoptera.mat, as.data.frame(HabitatbyPatch.df))
+HabitatbyPatch.r2a <- RsquareAdj(HabitatbyPatch.rda)$adj.r.squared
 
-Habitat.fwd <- forward.sel(Trichoptera.mat,Habitat.df, adjR2thresh=Space.r2a)
+HabitatbyPatch.fwd <- forward.sel(Trichoptera.mat,HabitatbyPatch.df, adjR2thresh=Space.r2a)
 
 #
 
