@@ -92,14 +92,14 @@ RsquareAdj(NonIHabNoSpace.rda)
     #Fines = Percent of the substrate as "fines" i.e. small particles too small to measure
     #AveAr = The average size of rocks where each sample was collected
 
-HabitatbyPatch.rda <- rda(Trichoptera.mat, as.data.frame(HabitatbyPatch.df))
+HabitatbyPatch.rda <- rda(Trichoptera.mat, as.data.frame(HabitatbyPatch.mat))
 HabitatbyPatch.r2a <- RsquareAdj(HabitatbyPatch.rda)$adj.r.squared
 
-HabitatbyPatch.fwd <- forward.sel(Trichoptera.mat,HabitatbyPatch.df, adjR2thresh=Space.r2a)
+HabitatbyPatch.fwd <- forward.sel(Trichoptera.mat,HabitatbyPatch.mat, adjR2thresh=Space.r2a)
 
-#
-
+#Depth is significant to the habitat variables.
+HabitatbyPatch.fwd
 #Part 4: How do you expect selecting both the spatial and the habitat variables would change the results of the RDAs from Part 1 above? (5 points)
   #(You do not need to redo the RDAs, unless you *want* to.)
-#
+#The habitat variables are more specific than spatial variables. Therefore, the results would be more clear and easily explained for habitat variables.
 
