@@ -75,7 +75,8 @@ RsquareAdj(NonIHabNoSpace.rda)
 
 
 #Part 2: What is your interpretation of the pattern for each group individually, and the two in comparison, based on their mobility? (5 points)
-#There is 49% for space in Clingers, which means they move slowly.The Trichoptera have a 2.46% in no space, so they move faster.
+#sPACENOHAB TRI 54.36 conditional 23.05 HABNOSPACE TRI 2.03 75.38 noninsectspacenohab clinger 49.75 25.82nonisencthabnospace clinger 4.30 71.27
+#When Trichoptera have space, they is no significance, but with habitat, it is significant from constrained 2.03% and conditional 75.38%. Similarly, clingers have an no significant change to space, but significant habitat difference of 4.30% and 71.27%.Therefore, their mobility is the same for both Trichoptera and Clingers.
 
 
 
