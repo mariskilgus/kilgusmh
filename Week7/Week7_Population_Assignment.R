@@ -6,8 +6,8 @@ library(anytime)
 install.packages("ggplot2")
 library(ggplot2)
 
-# Read the "Plankton_move_average" CSV in from GitHub. 
-setwd("C:/Users/kilgus/Documents/GitHub/kilgusmh/Week7")
+0# Read the "Plankton_move_average" CSV in from GitHub. 
+setwd("C:/GitHub/kilgusmh/Week7")
 data <- read.csv("Plankton_move_average.csv")
 # These are data from the Great Lakes Environmental Research Laboratory plankton sampling.
 
@@ -32,6 +32,8 @@ ggplot(data)  +
 #Bythotrephes is the r-selected prey and D.mendotae is the primary predator.
 # What is one relationship the third species MIGHT have to the first two? (2 pts)
 #Limncalanus could be the predator of Bythotrephes and the prey of D.mendotae.
+#These relationships are backward. D. mendotae is the prey.
+
 
 #Now copy/paste in the Lotka-Volterra function, plotting script, and load the "deSolve" package from the tutorial:
 install.packages("deSolve")
@@ -53,6 +55,7 @@ LotVmod <- function (Time, State, Pars) {
 
 # (2) - What do alpha, beta, gamma, and delta represent in this function? (4 pts)
 #They are each of the comparatives used to create the graph.
+#This is not what they represent - they are coeffecients for estimating predator-prey relationships.
 
 # (3) - By only changing values for alpha, beta, gamma, and/or delta
 Pars <- c(alpha = 2, beta = 0.5, gamma = .2, delta = .6) 
@@ -112,6 +115,8 @@ legend("topright", c("Limncalanus", "D.mendotae"), lty = c(1,2), col = c(1,2), b
 # change the default parameters of the L-V model to best approximate the relationship between Limncalanus and D.mendotae, assuming both plots are on the same time scale.
 # What are the changes you've made to alpha, beta, gamma, and delta from the default values; and what do they say in a relative sense about the plankton data? (4 pts)
 #A decrease in beta shows that when Limncalanus decreases, D.mendotae decreases as well. They are dependent of each other.
+#What are the changes that YOU have made, not the examples from the tutorial.
+#The point was to identify your own changes to the coeffecients and generate an entirely new plot.
 
 # Are there other paramenter changes that could have created the same end result? (2 pts)
 #A decrease in delta shows the same result.
