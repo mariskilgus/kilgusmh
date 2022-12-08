@@ -18,15 +18,24 @@ cowgas.csv <- read.csv("cowgas.csv", header=T)
 data <- rbind(beetlegas.csv,cowgas.csv)
 
 
-mergedf <- merge(beetlegas.csv,cowgas.csv,bF "row", All=T) 
+boxplot(data$FluxCO2~data$treatment)
+boxplot(data$FluxCH4~data$treatment)
+boxplot(data$FluxN2O~data$treatment)
+boxplot(data$FluxCO2~data$treatment, xlab = "Treatment", ylab = "Flux", main = "Antibiotic Effects on Flux", 
+     cex.axis=1, cex.main = 1.5, cex.lab = 1.15, pch=17, col = "red", cex = 1.5)
+
+
+
+summary(2:5)
+t.test(2:5)
+
+
+hist(2:3)
+barplot(data$FluxCO2~data$treatment)
+plot(data$FluxCO2~data$treatment)
 
 
 
 
-
-
-
-plot(beetlegas.csv)
-plot(cowgas.csv)
 
 
