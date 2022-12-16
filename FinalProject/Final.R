@@ -4,7 +4,7 @@
 #Question: How do antibiotics effect greenhouse emissions from cows?
 #Goals:Boxplot of each gas of treatments for each experiment showing ANOVA, and	Scatter plot of significant gas flux, and independent gas flux showing linear regression.
 
-setwd("C:/Users/kilgus/Documents/GitHub/kilgusmh/FinalProject")
+setwd("C:/GitHub/kilgusmh/FinalProject")#Working directory is wrong.
 install.packages("vegan")
 library(vegan)
 
@@ -48,6 +48,7 @@ Antibiotic <- subset(data, treatment== "Antibiotic")
 plot(Control$FluxCO2)
 #Separate control from Antibiotic by creating a new dataframe
 Control <- subset(data, treatment== "Control")
+#What are these subsets and plots for?
 #Create scatter plot of the relationship between CO2 and N2O
 plot(data$FluxCO2 ~ data$FluxN2O, xlim = c(0, 3.5))
 plot(data$FluxCO2 ~ data$FluxN2O,xlim = c(0, 3.5), ylim = c(0, 45000), xlab = "N2O Flux", ylab = "CO2 Flux", main = "Relationship of Gas Fluxes",
@@ -57,5 +58,6 @@ plot(data$FluxCO2 ~ data$FluxN2O,xlim = c(0, 3.5), ylim = c(0, 45000), xlab = "N
 FluxCO2.lm <- lm(data$FluxCO2 ~ data$FluxN2O)
 
 summary(FluxCO2.lm)
+#Why didn't you run this model including flux and treatment like we talked about? 
 
 #Save each graph to the Final Project folder for the results report.
